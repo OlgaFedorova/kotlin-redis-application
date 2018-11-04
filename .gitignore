@@ -64,3 +64,5 @@ hs_err_pid*
 /mvnw.cmd
 /.mvn/wrapper/maven-wrapper.properties
 /kotlin-redis-application.iml
+/tweet-gathering/tweet-gathering.iml
+/tweet-api-stub/tweet-api-stub.iml

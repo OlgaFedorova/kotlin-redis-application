@@ -1,9 +1,9 @@
 server:
-  port: 8080
+  port: 9099
 
 spring:
   rabbitmq:
-    host: localhost
+    host: rabbitmq
     username: guest
     password: guest
     port: 5672
@@ -12,8 +12,3 @@ queue:
   twitter: twitter-stream
 exchange:
   twitter: twitter-exchange
-routing_key:
-  track: track.*
-
-twitter:
-  url: http://localhost:8081/api/tweet-api-stub

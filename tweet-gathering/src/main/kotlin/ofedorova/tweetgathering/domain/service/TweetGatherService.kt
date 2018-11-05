@@ -2,6 +2,7 @@ package ofedorova.tweetgathering.domain.service
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.BodyInserters
@@ -9,10 +10,10 @@ import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Flux
 
 @Service
-class TweetGatherService(private val webClient: WebClient) {
+class TweetGatherService(@Value("\${twitter.url}") private val url:String,
+                         private val webClient: WebClient) {
 
     fun streamFrom(query: String): Flux<Tweet> {
-        val url = "http://localhost:8081/api/tweet-api-stub"
         return this.webClient.mutate().baseUrl(url).build()
                 .post()
                 .body(BodyInserters.fromObject("track : ${query}"))

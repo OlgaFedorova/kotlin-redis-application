@@ -20,6 +20,7 @@
         <module>tracked-hashtag-service</module>
         <module>tweet-gathering</module>
         <module>tweet-api-stub</module>
+        <module>tweet-dispatcher</module>
     </modules>
 
 

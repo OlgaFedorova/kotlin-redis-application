@@ -1,0 +1,54 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3.7.0-management-alpine
+    container_name: rabbitmq
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - twitter
+  redis:
+    image: "redis:4.0.6-alpine"
+    container_name: redis
+    hostname: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - twitter
+  api-stub:
+    image: olgafedorova/tweet_api_stub
+    container_name: api-stub
+    hostname: api-stub
+    ports:
+      - "8081:8081"
+    networks:
+      - twitter
+  tracked:
+    image: olgafedorova/tracked_hashtag
+    container_name: tracked
+    hostname: tracked
+    ports:
+      - "9090:9090"
+    networks:
+      - twitter
+  gathering:
+    image: olgafedorova/tweet_gathering
+    container_name: gathering
+    hostname: gathering
+    ports:
+      - "8080:8080"
+    networks:
+      - twitter
+  dispatcher:
+    image: olgafedorova/tracked_dispatcher
+    container_name: dispatcher
+    hostname: dispatcher
+    ports:
+      - "9099:9099"
+    networks:
+      - twitter
+networks:
+  twitter:
+    driver: bridge

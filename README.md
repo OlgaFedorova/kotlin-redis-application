@@ -10,11 +10,17 @@ docker run -d --rm --name hashtag-tracker --net twitter -p 9090:9090 olgafedorov
 
 docker run -d --rm --name api-stub --net twitter -p 8081:8081 olgafedorova/tweet_api_stub
 
-docker run -d --rm --name gathering --net twitter -p 8080:8080 olgafedorova/tweet_gathering
+docker run -d --rm --name gathering --netolgafedorova/tracked_dispatcher twitter -p 8080:8080 olgafedorova/tweet_gathering
 
-docker run -d --rm --name dispatcher --net twitter -p 9099:9099 olgafedorova/tracked_dispatcher
+docker run -d --rm --name dispatcher --net twitter -p 9099:9099 
+
+docker-compose up -d
+
+docker exec -it gathering /bin/bash
 
 curl -H "Content-Type: application/json" -X POST -d'{"hashTag":"bitcoin","queue":"bitcoin"}' http://localhost:9090/api/tracked-hash-tag
+
+curl http://localhost:9099/tweets
 
 mvn clean install docker:build
 
